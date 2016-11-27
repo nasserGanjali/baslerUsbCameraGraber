@@ -14,10 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    usbcamera.cpp
+    usbcamera.cpp \
+    stringmodel.cpp
 
 HEADERS  += mainwindow.h \
-    usbcamera.h
+    usbcamera.h \
+    stringmodel.h
 
 FORMS    += mainwindow.ui
 
