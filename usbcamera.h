@@ -10,6 +10,13 @@
 #include <QObject>
 #include "time.h"
 #include "stringmodel.h"
+//#include "mainwindow.h"
+
+#define BUFFERSIZE 256
+#define WIDTH 1600
+#define HEIGHT 1200
+
+//class MainWindow;
 
 // Namespace for using pylon objects.
 using namespace Pylon;
@@ -30,6 +37,8 @@ public:
 
     // Number of images to be grabbed.
     static const uint32_t c_countOfImagesToGrab = 100;
+    uint8_t sharedData[BUFFERSIZE][WIDTH * HEIGHT];
+    int circularSharedBufferPtr = -1;
 
 private:
     stringModel stringModelIns;

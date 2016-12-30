@@ -30,7 +30,7 @@ void MainWindow::cameraImageIsReady(const u_int8_t *data, int imageSize)
 //    QFile file("/tmp/image");
 //    file.open(QFile::WriteOnly);
 //    file.write((const char *)data,imageSize);
-    QImage *im = new QImage((const uchar*)data,1600,1200,QImage::Format_RGB888);
+    QImage *im = new QImage((const uchar*)data,WIDTH,HEIGHT,QImage::Format_RGB888);
 
     scene->clear();
     scene->addPixmap(QPixmap::fromImage(*im));

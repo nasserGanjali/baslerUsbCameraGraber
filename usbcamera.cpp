@@ -97,8 +97,8 @@ int usbCamera::loadConfig()
 
 int usbCamera::getFrame()
 {
-    camera->StartGrabbing(1);
-
+    camera->StartGrabbing(240);
+    int flag;
     // Camera.StopGrabbing() is called automatically by the RetrieveResult() method
     // when c_countOfImagesToGrab images have been retrieved.
     clock_t begin = clock();
@@ -111,13 +111,23 @@ int usbCamera::getFrame()
         // Image grabbed successfully?
         if (ptrGrabResult->GrabSucceeded())
         {
+            flag = circularSharedBufferPtr == -1 ? 0 : circularSharedBufferPtr - 1;
+            if(circularSharedBufferPtr == -1)
+                flag = 0;
+            else if(circularSharedBufferPtr == (BUFFERSIZE - 1))
+                flag = 0;
+            else
+                flag = circularSharedBufferPtr + 1;
+
             // Access the image data.
             counter ++;
             //            cout << "SizeX: " << ptrGrabResult->GetWidth() << endl;
             //            cout << "SizeY: " << ptrGrabResult->GetHeight() << endl;
             const uint8_t *pImageBuffer = (uint8_t *) ptrGrabResult->GetBuffer();
 
-            emit frameIsReady(pImageBuffer, ptrGrabResult->GetImageSize());
+            memcpy(sharedData[flag],pImageBuffer, ptrGrabResult->GetImageSize());
+
+            circularSharedBufferPtr = circularSharedBufferPtr + 1 >= BUFFERSIZE ? 0 : circularSharedBufferPtr + 1;
         }
         else
         {

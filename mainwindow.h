@@ -9,10 +9,15 @@
 #include "usbcamera.h"
 #include "stringmodel.h"
 
+#define BUFFERSIZE 256
+#define WIDTH 1600
+#define HEIGHT 1200
+
 namespace Ui {
 class MainWindow;
 }
 
+//class usbCamera;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
