@@ -113,8 +113,8 @@ int usbCamera::getFrame()
         {
             // Access the image data.
             counter ++;
-//            cout << "SizeX: " << ptrGrabResult->GetWidth() << endl;
-//            cout << "SizeY: " << ptrGrabResult->GetHeight() << endl;
+            //            cout << "SizeX: " << ptrGrabResult->GetWidth() << endl;
+            //            cout << "SizeY: " << ptrGrabResult->GetHeight() << endl;
             const uint8_t *pImageBuffer = (uint8_t *) ptrGrabResult->GetBuffer();
 
             emit frameIsReady(pImageBuffer, ptrGrabResult->GetImageSize());
@@ -124,11 +124,11 @@ int usbCamera::getFrame()
             cout << "Error: " << ptrGrabResult->GetErrorCode() << " " << ptrGrabResult->GetErrorDescription() << endl;
         }
     }
-//    QFile file("/tmp/file");
-//    file.open(QFile::WriteOnly);
-//    file.write((const char *)ptrGrabResult->GetBuffer(),ptrGrabResult->GetImageSize());
-//    file.close();
+    //    QFile file("/tmp/file");
+    //    file.open(QFile::WriteOnly);
+    //    file.write((const char *)ptrGrabResult->GetBuffer(),ptrGrabResult->GetImageSize());
+    //    file.close();
     clock_t end = clock();
     cout << "total time :" <<(double)(end - begin) / CLOCKS_PER_SEC << endl;
-//    cout << counter / ((double)(end - begin) / CLOCKS_PER_SEC) << " fps"<<endl;
+    //    cout << counter / ((double)(end - begin) / CLOCKS_PER_SEC) << " fps"<<endl;
 }
